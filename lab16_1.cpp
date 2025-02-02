@@ -4,13 +4,41 @@
 #include<iomanip>
 using namespace std;
 
-void showData(double *,int,int);
+void showData(double *dPtr, int N, int M){
+    for(int i = 0; i < N*M; i++){
+        cout << fixed << setprecision(2);
+        cout << dPtr[i];
+        if((i+1)%M == 0) cout << endl;
+        else cout << " ";
+    }
+}
 
-void randData(double *,int,int);
+void randData(double *dPtr, int N, int M){
+    for(int i = 0; i < N*M; i++){
+        dPtr[i] = (rand()%101)/100.0;
+    }
+}
 
-void findRowSum(const double *,double *,int,int);
 
-void findColSum(const double *,double *,int,int);
+void findRowSum(const double *dPtr, double *sum1, int N, int M){
+    for(int i = 0; i < N; i++){
+        double total = 0;
+        for(int j = 0; j < M; j++){
+            total += dPtr[i*M + j];
+        }
+        sum1[i] = total;
+    }
+}
+
+void findColSum(const double *dPtr, double *sum2, int N, int M){
+    for(int j = 0; j < M; j++){
+        double total = 0;
+        for(int i = 0; i < N; i++){
+            total += dPtr[i*M + j];
+        }
+        sum2[j] = total;
+    }
+}
 
 int main(){
 	srand(time(0));
